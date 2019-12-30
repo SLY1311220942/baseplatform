@@ -16,13 +16,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .authorizeRequests()
+                .headers()
+                .frameOptions()
+                .disable();
+        http
+
+                .authorizeRequests()
                 // 放行路径
-                .antMatchers("/css/**","/**").permitAll()
+                .antMatchers("/css/**", "/**").permitAll()
                 // 其它路径需要校验
                 .anyRequest().authenticated()
                 .and()
-            .formLogin()
+                .formLogin()
                 .and()
                 //关闭CSRF
                 .csrf().disable()

@@ -6,6 +6,9 @@ spring:
   devtools:
     restart:
       enabled: false
+  thymeleaf:
+    prefix: classpath:/templates/
+    cache: false
 server:
   port: 8080
 eureka:

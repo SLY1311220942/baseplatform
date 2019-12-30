@@ -10,6 +10,9 @@
     <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon"/>
     <link rel="stylesheet" th:href="@{/resource/plugin/weAdmin/static/css/font.css}">
     <link rel="stylesheet" th:href="@{/resource/plugin/weAdmin/static/css/weadmin.css}">
+    <script>
+        var webRoot = '[[${#httpServletRequest.getContextPath()}]]';
+    </script>
 </th:block>
 
 <th:block th:fragment="common_js">
