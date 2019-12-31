@@ -3,6 +3,8 @@ package com.sly.baseplatform.common.model;
 import com.sly.plugin.common.model.BaseModel;
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @author SLY
  * @time 2019/12/19
@@ -66,4 +68,8 @@ public class Func extends BaseModel {
      * remark varchar(240) NULL备注
      */
     private String remark;
+    /**
+     * 扩展字段：子菜单
+     */
+    private List<Func> child;
 }
