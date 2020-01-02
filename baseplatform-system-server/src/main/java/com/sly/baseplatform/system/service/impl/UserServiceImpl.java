@@ -7,7 +7,9 @@ import com.sly.baseplatform.system.service.UserService;
 import com.sly.plugin.common.result.BaseResult;
 import com.sly.plugin.common.result.ResultStatus;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -21,14 +23,15 @@ import java.util.List;
  */
 @Slf4j
 @RestController
+@Transactional(rollbackFor = Exception.class)
 public class UserServiceImpl implements UserService {
 
     @Resource
     private UserMapper userMapper;
 
     @Override
-    public BaseResult findUserById(String id) {
-        User user = userMapper.findUserById(id);
+    public BaseResult findUserDetail(@RequestParam("userId") String userId) {
+        User user = userMapper.findUserById(userId);
         return new BaseResult(ResultStatus.QUERY_SUCCESS, "user", user);
     }
 
@@ -37,5 +40,35 @@ public class UserServiceImpl implements UserService {
         Page<User> page = new Page<>(user.getStartNum(), user.getPageSize());
         List<User> list = userMapper.findUserList(page, user);
         return new BaseResult(ResultStatus.QUERY_SUCCESS, page.getTotal(), list);
+    }
+
+    @Override
+    public BaseResult addUser(@RequestBody User user) {
+        userMapper.insert(user);
+        return new BaseResult(ResultStatus.SAVE_SUCCESS);
+    }
+
+    @Override
+    public BaseResult updateUser(@RequestBody User user) {
+        userMapper.updateUser(user);
+        return new BaseResult(ResultStatus.UPDATE_SUCCESS);
+    }
+
+    @Override
+    public BaseResult deleteUser(@RequestParam("userId") String userId) {
+        userMapper.deleteUser(userId);
+        return new BaseResult(ResultStatus.DELETE_SUCCESS);
+    }
+
+    @Override
+    public BaseResult activeUser(@RequestParam("userId") String userId) {
+        userMapper.activeUser(userId);
+        return new BaseResult(ResultStatus.UPDATE_SUCCESS);
+    }
+
+    @Override
+    public BaseResult disableUser(@RequestParam("userId") String userId) {
+        userMapper.disableUser(userId);
+        return new BaseResult(ResultStatus.UPDATE_SUCCESS);
     }
 }

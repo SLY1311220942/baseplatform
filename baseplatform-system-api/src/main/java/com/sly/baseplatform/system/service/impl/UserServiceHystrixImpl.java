@@ -16,12 +16,37 @@ import org.springframework.stereotype.Component;
 public class UserServiceHystrixImpl implements UserService {
 
     @Override
-    public BaseResult findUserById(String id) {
-        return new BaseResult(ResultStatus.QUERY_FAILED);
+    public BaseResult findUserDetail(String userId) {
+        return new BaseResult(ResultStatus.FAILED);
     }
 
     @Override
     public BaseResult findUserList(User user) {
-        return new BaseResult(ResultStatus.QUERY_FAILED);
+        return new BaseResult(ResultStatus.FAILED);
+    }
+
+    @Override
+    public BaseResult addUser(User user) {
+        return new BaseResult(ResultStatus.FAILED);
+    }
+
+    @Override
+    public BaseResult updateUser(User user) {
+        return new BaseResult(ResultStatus.FAILED);
+    }
+
+    @Override
+    public BaseResult deleteUser(String userId) {
+        return new BaseResult(ResultStatus.FAILED);
+    }
+
+    @Override
+    public BaseResult activeUser(String userId) {
+        return new BaseResult(ResultStatus.FAILED);
+    }
+
+    @Override
+    public BaseResult disableUser(String userId) {
+        return new BaseResult(ResultStatus.FAILED);
     }
 }

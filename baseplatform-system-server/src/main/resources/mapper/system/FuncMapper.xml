@@ -2,30 +2,117 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sly.baseplatform.system.mapper.FuncMapper">
 
-    <!--查询最上层菜单-->
-    <select id="findTopFunc" parameterType="string" resultType="com.sly.baseplatform.common.model.Func">
-        SELECT * FROM `T_SYS_FUNC` TSF
+
+    <!--查询用户最上层菜单-->
+    <select id="findUserTopFunc" parameterType="string" resultType="com.sly.baseplatform.common.model.Func">
+        SELECT TSF.* FROM `T_SYS_FUNC` TSF
+        LEFT JOIN `T_SYS_ROLEFUNC` TSRF ON TSF.`id`=TSRF.`funcId`
+        LEFT JOIN `T_SYS_USERROLE` TSUR ON TSRF.`roleId`= TSUR.`roleId`
         <where>
-            TSF.`funcTag`=0
+            TSUR.`userId`=#{userId}
+            AND TSF.`funcTag`=0
             AND (TSF.`parentId` IS NULL OR TSF.`parentId`='')
             AND TSF.`isOpen`=1
             AND TSF.`logicDel`='N'
-            AND IF(1 IN (SELECT userTag FROM `T_SYS_USER` TSU WHERE TSU.`id`=#{userId}),TRUE,TSF.`funcType` IN (SELECT userTag FROM `T_SYS_USER` TSU WHERE TSU.`id`=#{userId}))
+        </where>
+        ORDER BY funcSort ASC
+    </select>
+
+    <!--查询用户下层菜单-->
+    <select id="findUserFuncChild" resultType="com.sly.baseplatform.common.model.Func">
+        SELECT TSF.* FROM `T_SYS_FUNC` TSF
+        LEFT JOIN `T_SYS_ROLEFUNC` TSRF ON TSF.`id`=TSRF.`funcId`
+        LEFT JOIN `T_SYS_USERROLE` TSUR ON TSRF.`roleId`= TSUR.`roleId`
+        <where>
+            TSUR.`userId`=#{userId}
+            AND TSF.`funcTag`=0
+            AND TSF.`parentId`=#{funcId}
+            AND TSF.`isOpen`=1
+            AND TSF.`logicDel`='N'
+        </where>
+        ORDER BY funcSort ASC
+    </select>
+
+    <!--查询最上层菜单-->
+    <select id="findTopFunc" resultType="com.sly.baseplatform.common.model.Func">
+        SELECT * FROM `T_SYS_FUNC` TSF
+        <where>
+            TSF.`isOpen`=1
+            AND TSF.`logicDel`='N'
+            AND (TSF.`parentId` IS NULL OR TSF.`parentId`='')
         </where>
         ORDER BY funcSort ASC
     </select>
 
     <!--查询下层菜单-->
-    <select id="findUserFuncChild" resultType="com.sly.baseplatform.common.model.Func">
+    <select id="findFuncChild" parameterType="string" resultType="com.sly.baseplatform.common.model.Func">
         SELECT * FROM `T_SYS_FUNC` TSF
         <where>
-            TSF.`funcTag`=0
-            AND (TSF.`parentId` IS NULL OR TSF.`parentId`='')
-            AND TSF.`isOpen`=1
+            TSF.`isOpen`=1
             AND TSF.`logicDel`='N'
-            AND IF(1 IN (SELECT userTag FROM `T_SYS_USER` TSU WHERE TSU.`id`=#{userId}),TRUE,TSF.`funcType` IN (SELECT userTag FROM `T_SYS_USER` TSU WHERE TSU.`id`=#{userId}))
+            AND TSF.`parentId`=#{funcId}
         </where>
         ORDER BY funcSort ASC
-
     </select>
+
+    <!--查询全部下级菜单-->
+    <select id="findAllChildFunc" parameterType="string" resultType="com.sly.baseplatform.common.model.Func">
+        SELECT * FROM `T_SYS_FUNC` TSF
+        <where>
+            TSF.`isOpen`=1
+            AND TSF.`logicDel`='N'
+            <choose>
+                <when test="funcId != null and funcId != ''">
+                    AND TSF.`parentId`=#{funcId}
+                </when>
+                <otherwise>
+                    AND (TSF.`parentId` IS NULL OR TSF.`parentId`='')
+                </otherwise>
+            </choose>
+        </where>
+        ORDER BY funcSort ASC
+    </select>
+
+    <!--根据id查询菜单详情-->
+    <select id="findFuncById" parameterType="string" resultType="com.sly.baseplatform.common.model.Func">
+        SELECT * FROM `T_SYS_FUNC` TSF WHERE TSF.`id`=#{funcId} AND TSF.`logicDel`='N'
+    </select>
+
+    <!--修改功能菜单-->
+    <update id="updateFunc" parameterType="com.sly.baseplatform.common.model.Func">
+        UPDATE `T_SYS_FUNC` TSF
+        <set>
+            <if test="func.funcName != null and func.funcName != ''">
+                TSF.`funcName`=#{func.funcName},
+            </if>
+            <if test="func.funcIcon != null and func.funcIcon != ''">
+                TSF.`funcIcon`=#{func.funcIcon},
+            </if>
+            <if test="func.funcUrl != null and func.funcUrl != ''">
+                TSF.`funcUrl`=#{func.funcUrl},
+            </if>
+            <if test="func.funcTag != null and func.funcTag != ''">
+                TSF.`funcTag`=#{func.funcTag},
+            </if>
+            <if test="func.updateTime != null and func.updateTime != ''">
+                TSF.`updateTime`=#{func.updateTime},
+            </if>
+            <if test="func.funcSort != null and func.funcSort != ''">
+                TSF.`funcSort`=#{func.funcSort},
+            </if>
+            <if test="func.isOpen != null and func.isOpen != ''">
+                TSF.`isOpen`=#{func.isOpen},
+            </if>
+            <if test="func.remark != null and func.remark != ''">
+                TSF.`remark`=#{func.remark},
+            </if>
+        </set>
+        WHERE TSF.`id`=#{func.id}
+    </update>
+
+    <!--逻辑删除功能菜单-->
+    <update id="deleteFunc" parameterType="string">
+        UPDATE `T_SYS_FUNC` TSF SET TSF.`logicDel`='Y' WHERE TSF.`id`=#{funcId}
+    </update>
+
 </mapper>

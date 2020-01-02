@@ -1,5 +1,7 @@
 package com.sly.baseplatform.common.constant;
 
+import com.sun.xml.internal.bind.v2.model.core.ID;
+
 /**
  * 公共常量
  *
@@ -60,6 +62,19 @@ public class ComConstant {
          * 性别：W.女
          */
         public static final String W = "W";
+    }
+
+    /**
+     * ID
+     *
+     * @author SLY
+     * @time 2019/12/31
+     */
+    public static class Id {
+        /**
+         * 系统超级管理员ID："1"
+         */
+        public static final String ADMIN_ID = "1";
     }
 
 

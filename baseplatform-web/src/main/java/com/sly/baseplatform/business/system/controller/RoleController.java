@@ -1,8 +1,21 @@
 package com.sly.baseplatform.business.system.controller;
 
 import com.sly.baseplatform.common.BaseController;
+import com.sly.baseplatform.common.model.Role;
+import com.sly.baseplatform.system.service.RoleService;
+import com.sly.plugin.common.result.BaseResult;
+import com.sly.plugin.common.result.ResultStatus;
+import com.sly.plugin.validate.annotation.Valid;
+import com.sly.plugin.validate.annotation.Validate;
+import com.sly.plugin.validate.constraints.NotBlank;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 角色controller
@@ -13,6 +26,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/role")
 public class RoleController extends BaseController {
+
+    @Resource
+    private RoleService roleService;
 
     /**
      * 去角色新增页面
@@ -30,13 +46,15 @@ public class RoleController extends BaseController {
     /**
      * 去角色详情页面
      *
-     * @param
+     * @param request
+     * @param roleId
      * @return
      * @author SLY
      * @time 2019/12/30
      */
     @RequestMapping("/toRoleDetail")
-    public String toRoleDetail() {
+    public String toRoleDetail(HttpServletRequest request, String roleId) {
+        request.setAttribute("roleId", roleId);
         return "system/role/role_detail.html";
     }
 
@@ -56,13 +74,15 @@ public class RoleController extends BaseController {
     /**
      * 去角色修改页面
      *
-     * @param
+     * @param request
+     * @param roleId
      * @return
      * @author SLY
      * @time 2019/12/30
      */
     @RequestMapping("/toRoleUpdate")
-    public String toRoleUpdate() {
+    public String toRoleUpdate(HttpServletRequest request, String roleId) {
+        request.setAttribute("roleId", roleId);
         return "system/role/role_update.html";
     }
 
@@ -90,5 +110,85 @@ public class RoleController extends BaseController {
     @RequestMapping("/toRoleUserRelation")
     public String toRoleUserRelation() {
         return "system/role/roleUser_relation.html";
+    }
+
+    /**
+     * 新增角色
+     *
+     * @param role
+     * @return
+     * @author SLY
+     * @time 2020/1/2
+     */
+    @Validate
+    @ResponseBody
+    @RequestMapping("/addRole")
+    public BaseResult addRole(@Valid("addRole") Role role) {
+        try {
+            return roleService.addRole(role);
+        } catch (Exception e) {
+            log.error("新增角色异常：{}", ExceptionUtils.getStackTrace(e));
+            return new BaseResult(ResultStatus.SAVE_FAILED);
+        }
+    }
+
+    /**
+     * 修改角色
+     *
+     * @param role
+     * @return
+     * @author SLY
+     * @time 2020/1/2
+     */
+    @Validate
+    @ResponseBody
+    @RequestMapping("/updateRole")
+    public BaseResult updateRole(@Valid("updateRole") Role role) {
+        try {
+            return roleService.updateRole(role);
+        } catch (Exception e) {
+            log.error("修改角色异常：{}", ExceptionUtils.getStackTrace(e));
+            return new BaseResult(ResultStatus.UPDATE_FAILED);
+        }
+    }
+
+    /**
+     * 删除角色
+     *
+     * @param roleId
+     * @return
+     * @author SLY
+     * @time 2020/1/2
+     */
+    @Validate
+    @ResponseBody
+    @RequestMapping("/deleteRole")
+    public BaseResult deleteRole(@NotBlank(message = "角色id不能为空！") String roleId) {
+        try {
+            return roleService.deleteRole(roleId);
+        } catch (Exception e) {
+            log.error("删除角色异常：{}", ExceptionUtils.getStackTrace(e));
+            return new BaseResult(ResultStatus.DELETE_FAILED);
+        }
+    }
+
+    /**
+     * 激活角色
+     *
+     * @param roleId
+     * @return
+     * @author SLY
+     * @time 2020/1/2
+     */
+    @Validate
+    @ResponseBody
+    @RequestMapping("/activeRole")
+    public BaseResult activeRole(@NotBlank(message = "角色id不能为空！") String roleId) {
+        try {
+            return roleService.activeRole(roleId);
+        } catch (Exception e){
+            log.error("激活角色异常：{}", ExceptionUtils.getStackTrace(e));
+            return new BaseResult(ResultStatus.UPDATE_FAILED);
+        }
     }
 }

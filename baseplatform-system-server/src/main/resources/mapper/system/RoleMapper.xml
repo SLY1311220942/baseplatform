@@ -2,4 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sly.baseplatform.system.mapper.RoleMapper">
 
+    <!--修改角色-->
+    <update id="updateRole" parameterType="com.sly.baseplatform.common.model.Role">
+        UPDATE `T_SYS_ROLE` TSR
+        <set>
+            <if test="role.roleName != null and role.roleName != ''">
+                TSR.`roleName`=#{role.roleName},
+            </if>
+            <if test="role.isOpen != null and role.isOpen != ''">
+                TSR.`isOpen`=#{role.isOpen},
+            </if>
+            <if test="role.updateTime != null and role.updateTime != ''">
+                TSR.`updateTime`=#{role.updateTime},
+            </if>
+            <if test="role.remark != null and role.remark != ''">
+                TSR.`remark`=#{role.remark},
+            </if>
+        </set>
+        WHERE TSR.`id`=#{role.id}
+    </update>
+
+    <!--逻辑删除角色-->
+    <update id="deleteRole" parameterType="string">
+        UPDATE `T_SYS_ROLE` TSR SET TSR.`logicDel`='Y' WHERE TSR.`id`=#{roleId}
+    </update>
+
+
 </mapper>

@@ -5,11 +5,16 @@ import com.sly.baseplatform.common.model.User;
 import com.sly.baseplatform.system.service.UserService;
 import com.sly.plugin.common.result.BaseResult;
 import com.sly.plugin.common.result.ResultStatus;
+import com.sly.plugin.validate.annotation.Valid;
+import com.sly.plugin.validate.annotation.Validate;
+import com.sly.plugin.validate.constraints.NotBlank;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 用户controller
@@ -53,26 +58,30 @@ public class UserController extends BaseController {
     /**
      * 去用户修改页面
      *
-     * @param
+     * @param request
+     * @param userId
      * @return
      * @author SLY
      * @time 2019/12/30
      */
     @RequestMapping("/toUserUpdate")
-    public String toUserUpdate() {
+    public String toUserUpdate(HttpServletRequest request, String userId) {
+        request.setAttribute("userId", userId);
         return "system/user/user_update.html";
     }
 
     /**
      * 去用户详情页面
      *
-     * @param
+     * @param request
+     * @param userId
      * @return
      * @author SLY
      * @time 2019/12/30
      */
     @RequestMapping("/toUserDetail")
-    public String toUserDetail() {
+    public String toUserDetail(HttpServletRequest request, String userId) {
+        request.setAttribute("userId", userId);
         return "system/user/user_detail.html";
     }
 
@@ -90,20 +99,21 @@ public class UserController extends BaseController {
     }
 
     /**
-     * 根据用户id查询用户
+     * 查询用户详情
      *
-     * @param id
+     * @param userId
      * @return
      * @author SLY
      * @time 2019/12/24
      */
+    @Validate
     @ResponseBody
-    @RequestMapping("/findUserById")
-    public BaseResult findUserById(String id) {
+    @RequestMapping("/findUserDetail")
+    public BaseResult findUserDetail(@NotBlank(message = "用户id不能为空！") String userId) {
         try {
-            return userService.findUserById(id);
+            return userService.findUserDetail(userId);
         } catch (Exception e) {
-            log.info("根据用户id查询用户异常[]", e);
+            log.error("查询用户详情异常：{}", ExceptionUtils.getStackTrace(e));
             return new BaseResult(ResultStatus.QUERY_FAILED);
         }
     }
@@ -122,8 +132,108 @@ public class UserController extends BaseController {
         try {
             return userService.findUserList(user);
         } catch (Exception e) {
-            log.info("根据用户id查询用户异常[]", e);
+            log.error("查询用户列表异常：{}", ExceptionUtils.getStackTrace(e));
             return new BaseResult(ResultStatus.QUERY_FAILED);
+        }
+    }
+
+    /**
+     * 新增用户
+     *
+     * @param user
+     * @return
+     * @author SLY
+     * @time 2020/1/2
+     */
+    @Validate
+    @ResponseBody
+    @RequestMapping("/addUser")
+    public BaseResult addUser(@Valid("addUser") User user) {
+        try {
+            return userService.addUser(user);
+        } catch (Exception e) {
+            log.error("新增用户异常：{}", ExceptionUtils.getStackTrace(e));
+            return new BaseResult(ResultStatus.SAVE_FAILED);
+        }
+    }
+
+    /**
+     * 修改用户
+     *
+     * @param user
+     * @return
+     * @author SLY
+     * @time 2020/1/2
+     */
+    @Validate
+    @ResponseBody
+    @RequestMapping("/updateUser")
+    public BaseResult updateUser(@Valid("updateUser") User user) {
+        try {
+            return userService.updateUser(user);
+        } catch (Exception e) {
+            log.error("修改用户异常：{}", ExceptionUtils.getStackTrace(e));
+            return new BaseResult(ResultStatus.UPDATE_FAILED);
+        }
+    }
+
+    /**
+     * 删除用户
+     *
+     * @param userId
+     * @return
+     * @author SLY
+     * @time 2020/1/2
+     */
+    @Validate
+    @ResponseBody
+    @RequestMapping("/deleteUser")
+    public BaseResult deleteUser(@NotBlank(message = "用户id不能为空！") String userId) {
+        try {
+            return userService.deleteUser(userId);
+        } catch (Exception e) {
+            log.error("删除用户异常：{}", ExceptionUtils.getStackTrace(e));
+            return new BaseResult(ResultStatus.DELETE_FAILED);
+        }
+    }
+
+    /**
+     * 激活用户
+     *
+     * @param userId
+     * @return
+     * @author SLY
+     * @time 2020/1/2
+     */
+    @Validate
+    @ResponseBody
+    @RequestMapping("/activeUser")
+    public BaseResult activeUser(@NotBlank(message = "用户id不能为空！") String userId) {
+        try {
+            return userService.activeUser(userId);
+        } catch (Exception e) {
+            log.error("激活用户异常：{}", ExceptionUtils.getStackTrace(e));
+            return new BaseResult(ResultStatus.UPDATE_FAILED);
+        }
+    }
+
+    /**
+     * 禁用用户
+     *
+     * @param userId
+     * @return
+     * @author SLY
+     * @time 2020/1/2
+     */
+    @Validate
+    @ResponseBody
+    @RequestMapping("/disableUser")
+    public BaseResult disableUser(@NotBlank(message = "用户id不能为空！") String userId) {
+        try {
+            return userService.disableUser(userId);
+        } catch (Exception e) {
+            log.error("禁用用户异常：{}", ExceptionUtils.getStackTrace(e));
+            return new BaseResult(ResultStatus.UPDATE_FAILED);
         }
     }
 }

@@ -33,4 +33,44 @@ public interface UserMapper extends BaseMapper<User> {
      * @time 2019/12/25
      */
     List<User> findUserList(Page<User> page, User user);
+
+    /**
+     * 修改用户
+     *
+     * @param user
+     * @return
+     * @author SLY
+     * @time 2020/1/2
+     */
+    int updateUser(User user);
+
+    /**
+     * 删除用户
+     *
+     * @param userId
+     * @return
+     * @author SLY
+     * @time 2020/1/2
+     */
+    int deleteUser(String userId);
+
+    /**
+     * 激活用户
+     *
+     * @param userId
+     * @return
+     * @author SLY
+     * @time 2020/1/2
+     */
+    int activeUser(String userId);
+
+    /**
+     * 禁用用户
+     *
+     * @param userId
+     * @return
+     * @author SLY
+     * @time 2020/1/2
+     */
+    int disableUser(String userId);
 }

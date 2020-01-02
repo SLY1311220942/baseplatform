@@ -72,6 +72,16 @@
                 <artifactId>plugin-common</artifactId>
                 <version>1.0</version>
             </dependency>
+            <dependency>
+                <groupId>com.sly</groupId>
+                <artifactId>plugin-validate</artifactId>
+                <version>1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sly</groupId>
+                <artifactId>plugin-validate-starter</artifactId>
+                <version>1.0</version>
+            </dependency>
 
             <dependency>
                 <groupId>com.google.guava</groupId>

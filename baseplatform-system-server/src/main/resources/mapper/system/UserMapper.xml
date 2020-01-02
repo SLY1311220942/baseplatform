@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sly.baseplatform.system.mapper.UserMapper">
 
+
     <!--根据用户id查询用户-->
     <select id="findUserById" parameterType="string" resultType="com.sly.baseplatform.common.model.User">
         SELECT * FROM `T_SYS_USER` TSU WHERE TSU.`id`=#{id}
@@ -23,4 +24,59 @@
         </where>
         ORDER BY TSU.`createTime` DESC
     </select>
+
+    <!--修改用户-->
+    <update id="updateUser" parameterType="com.sly.baseplatform.common.model.User">
+        UPDATE `T_SYS_USER` TSU
+        <set>
+            <if test="user.username != null and user.username != ''">
+                TSU.`username`=#{user.username},
+            </if>
+            <if test="user.nickname != null and user.nickname != ''">
+                TSU.`nickname`=#{user.nickname},
+            </if>
+            <if test="user.realname != null and user.realname != ''">
+                TSU.`realname`=#{user.realname},
+            </if>
+            <if test="user.phone != null and user.phone != ''">
+                TSU.`phone`=#{user.phone},
+            </if>
+            <if test="user.tel != null and user.tel != ''">
+                TSU.`tel`=#{user.tel},
+            </if>
+            <if test="user.email != null and user.email != ''">
+                TSU.`email`=#{user.email},
+            </if>
+            <if test="user.gender != null and user.gender != ''">
+                TSU.`gender`=#{user.gender},
+            </if>
+            <if test="user.updateTime != null and user.updateTime != ''">
+                TSU.`updateTime`=#{user.updateTime},
+            </if>
+            <if test="user.status != null and user.status != ''">
+                TSU.`status`=#{user.status},
+            </if>
+            <if test="user.remark != null and user.remark != ''">
+                TSU.`remark`=#{user.remark},
+            </if>
+        </set>
+        WHERE TSU.`id`=#{user.id}
+    </update>
+
+    <!--删除用户-->
+    <update id="deleteUser" parameterType="string">
+        UPDATE `T_SYS_USER` TSU SET TSU.`logicDel`='Y' WHERE TSU.`id`=#{userId}
+    </update>
+
+    <!--激活用户-->
+    <update id="activeUser" parameterType="string">
+        UPDATE `T_SYS_USER` TSU SET TSU.`status`=1 WHERE TSU.`id`=#{userId}
+    </update>
+
+    <!--禁用用户-->
+    <update id="disableUser" parameterType="string">
+        UPDATE `T_SYS_USER` TSU SET TSU.`status`=2 WHERE TSU.`id`=#{userId}
+    </update>
+
+
 </mapper>

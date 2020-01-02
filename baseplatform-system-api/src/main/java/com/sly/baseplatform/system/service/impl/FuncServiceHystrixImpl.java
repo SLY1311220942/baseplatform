@@ -1,5 +1,6 @@
 package com.sly.baseplatform.system.service.impl;
 
+import com.sly.baseplatform.common.model.Func;
 import com.sly.baseplatform.system.service.FuncService;
 import com.sly.plugin.common.result.BaseResult;
 import com.sly.plugin.common.result.ResultStatus;
@@ -15,7 +16,38 @@ import org.springframework.stereotype.Component;
 public class FuncServiceHystrixImpl implements FuncService {
 
     @Override
-    public BaseResult findUserAllFunc(String userId) {
-        return new BaseResult(ResultStatus.QUERY_FAILED);
+    public BaseResult findUserAllMenu(String userId) {
+        return new BaseResult(ResultStatus.FAILED);
     }
+
+    @Override
+    public BaseResult findAllMenu() {
+        return new BaseResult(ResultStatus.FAILED);
+    }
+
+    @Override
+    public BaseResult findAllChildFunc(String funcId) {
+        return new BaseResult(ResultStatus.FAILED);
+    }
+
+    @Override
+    public BaseResult findFuncDetail(String funcId) {
+        return new BaseResult(ResultStatus.FAILED);
+    }
+
+    @Override
+    public BaseResult addFunc(Func func) {
+        return new BaseResult(ResultStatus.FAILED);
+    }
+
+    @Override
+    public BaseResult updateFunc(Func func) {
+        return new BaseResult(ResultStatus.FAILED);
+    }
+
+    @Override
+    public BaseResult deleteFunc(String funcId) {
+        return new BaseResult(ResultStatus.FAILED);
+    }
+
 }
