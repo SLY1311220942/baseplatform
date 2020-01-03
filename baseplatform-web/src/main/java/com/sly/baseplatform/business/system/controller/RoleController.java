@@ -186,8 +186,28 @@ public class RoleController extends BaseController {
     public BaseResult activeRole(@NotBlank(message = "角色id不能为空！") String roleId) {
         try {
             return roleService.activeRole(roleId);
-        } catch (Exception e){
+        } catch (Exception e) {
             log.error("激活角色异常：{}", ExceptionUtils.getStackTrace(e));
+            return new BaseResult(ResultStatus.UPDATE_FAILED);
+        }
+    }
+
+    /**
+     * 禁用角色
+     *
+     * @param roleId
+     * @return
+     * @author SLY
+     * @time 2020/1/3
+     */
+    @Validate
+    @ResponseBody
+    @RequestMapping("/disableRole")
+    public BaseResult disableRole(@NotBlank(message = "角色id不能为空！") String roleId) {
+        try {
+            return roleService.disableRole(roleId);
+        } catch (Exception e) {
+            log.error("禁用角色异常：{}", ExceptionUtils.getStackTrace(e));
             return new BaseResult(ResultStatus.UPDATE_FAILED);
         }
     }

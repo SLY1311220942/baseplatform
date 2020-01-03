@@ -41,4 +41,16 @@ public class RoleServiceImpl implements RoleService {
         roleMapper.deleteRole(roleId);
         return new BaseResult(ResultStatus.DELETE_SUCCESS);
     }
+
+    @Override
+    public BaseResult activeRole(@RequestParam("roleId") String roleId) {
+        roleMapper.activeRole(roleId);
+        return new BaseResult(ResultStatus.UPDATE_SUCCESS);
+    }
+
+    @Override
+    public BaseResult disableRole(@RequestParam("roleId") String roleId) {
+        roleMapper.disableRole(roleId);
+        return new BaseResult(ResultStatus.UPDATE_SUCCESS);
+    }
 }

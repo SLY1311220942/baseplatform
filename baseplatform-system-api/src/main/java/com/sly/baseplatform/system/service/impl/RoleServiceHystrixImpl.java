@@ -29,4 +29,14 @@ public class RoleServiceHystrixImpl implements RoleService {
     public BaseResult deleteRole(String roleId) {
         return new BaseResult(ResultStatus.FAILED);
     }
+
+    @Override
+    public BaseResult activeRole(String roleId) {
+        return new BaseResult(ResultStatus.FAILED);
+    }
+
+    @Override
+    public BaseResult disableRole(String roleId) {
+        return new BaseResult(ResultStatus.FAILED);
+    }
 }

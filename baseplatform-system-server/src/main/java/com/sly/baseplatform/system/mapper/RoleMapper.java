@@ -30,4 +30,24 @@ public interface RoleMapper extends BaseMapper<Role> {
      * @time 2020/1/2
      */
     int deleteRole(String roleId);
+
+    /**
+     * 激活角色
+     *
+     * @param roleId
+     * @return
+     * @author SLY
+     * @time 2020/1/3
+     */
+    int activeRole(String roleId);
+
+    /**
+     * 禁用角色
+     *
+     * @param roleId
+     * @return
+     * @author SLY
+     * @time 2020/1/3
+     */
+    int disableRole(String roleId);
 }

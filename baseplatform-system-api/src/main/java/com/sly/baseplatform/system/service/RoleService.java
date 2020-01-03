@@ -47,4 +47,26 @@ public interface RoleService {
      */
     @RequestMapping(value = "/role/deleteRole", method = RequestMethod.POST)
     BaseResult deleteRole(@RequestParam("roleId") String roleId);
+
+    /**
+     * 激活角色
+     *
+     * @param roleId
+     * @return
+     * @author SLY
+     * @time 2020/1/3
+     */
+    @RequestMapping(value = "/role/activeRole", method = RequestMethod.POST)
+    BaseResult activeRole(@RequestParam("roleId") String roleId);
+
+    /**
+     * 禁用角色
+     *
+     * @param roleId
+     * @return
+     * @author SLY
+     * @time 2020/1/3
+     */
+    @RequestMapping(value = "/role/disableRole", method = RequestMethod.POST)
+    BaseResult disableRole(@RequestParam("roleId") String roleId);
 }

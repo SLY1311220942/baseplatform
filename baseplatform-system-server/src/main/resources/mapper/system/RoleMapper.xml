@@ -27,5 +27,15 @@
         UPDATE `T_SYS_ROLE` TSR SET TSR.`logicDel`='Y' WHERE TSR.`id`=#{roleId}
     </update>
 
+    <!--激活角色-->
+    <update id="activeRole" parameterType="string">
+        UPDATE `T_SYS_ROLE` TSR SET TSR.`isOpen`=1 WHERE TSR.`id`=#{roleId}
+    </update>
+
+    <!--禁用角色-->
+    <update id="disableRole" parameterType="string">
+        UPDATE `T_SYS_ROLE` TSR SET TSR.`isOpen`=0 WHERE TSR.`id`=#{roleId}
+    </update>
+
 
 </mapper>
