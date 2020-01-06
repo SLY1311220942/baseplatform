@@ -2,10 +2,10 @@ package com.sly.baseplatform.business.system.controller;
 
 import com.sly.baseplatform.common.BaseController;
 import com.sly.baseplatform.common.constant.ComConstant;
+import com.sly.baseplatform.common.constant.Status;
 import com.sly.baseplatform.common.model.Func;
 import com.sly.baseplatform.system.service.FuncService;
 import com.sly.plugin.common.result.BaseResult;
-import com.sly.plugin.common.result.ResultStatus;
 import com.sly.plugin.validate.annotation.Valid;
 import com.sly.plugin.validate.annotation.Validate;
 import com.sly.plugin.validate.constraints.NotBlank;
@@ -100,7 +100,7 @@ public class FuncController extends BaseController {
             }
         } catch (Exception e) {
             log.error("查询用户全部菜单异常：{}", ExceptionUtils.getStackTrace(e));
-            return new BaseResult(ResultStatus.QUERY_FAILED);
+            return new BaseResult(Status.QUERY_FAILED);
         }
 
     }
@@ -120,7 +120,7 @@ public class FuncController extends BaseController {
             return funcService.findAllChildFunc(funcId);
         } catch (Exception e) {
             log.error("查询全部下级菜单异常：{}", ExceptionUtils.getStackTrace(e));
-            return new BaseResult(ResultStatus.QUERY_FAILED);
+            return new BaseResult(Status.QUERY_FAILED);
         }
 
     }
@@ -141,7 +141,7 @@ public class FuncController extends BaseController {
             return funcService.findFuncDetail(funcId);
         } catch (Exception e) {
             log.error("查询菜单详情异常：{}", ExceptionUtils.getStackTrace(e));
-            return new BaseResult(ResultStatus.QUERY_FAILED);
+            return new BaseResult(Status.QUERY_FAILED);
         }
 
     }
@@ -162,7 +162,7 @@ public class FuncController extends BaseController {
             return funcService.addFunc(func);
         } catch (Exception e) {
             log.error("新增功能异常：{}", ExceptionUtils.getStackTrace(e));
-            return new BaseResult(ResultStatus.SAVE_FAILED);
+            return new BaseResult(Status.SAVE_FAILED);
         }
     }
 
@@ -182,7 +182,7 @@ public class FuncController extends BaseController {
             return funcService.updateFunc(func);
         } catch (Exception e) {
             log.error("修改功能异常：{}", ExceptionUtils.getStackTrace(e));
-            return new BaseResult(ResultStatus.UPDATE_FAILED);
+            return new BaseResult(Status.UPDATE_FAILED);
         }
     }
 
@@ -202,7 +202,7 @@ public class FuncController extends BaseController {
             return funcService.deleteFunc(funcId);
         } catch (Exception e) {
             log.error("删除功能异常：{}", ExceptionUtils.getStackTrace(e));
-            return new BaseResult(ResultStatus.DELETE_FAILED);
+            return new BaseResult(Status.DELETE_FAILED);
         }
     }
 }

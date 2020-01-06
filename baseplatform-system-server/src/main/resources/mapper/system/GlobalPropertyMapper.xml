@@ -2,4 +2,78 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sly.baseplatform.system.mapper.GlobalPropertyMapper">
 
+    <!--修改全局属性-->
+    <update id="updateGlobalProperty" parameterType="com.sly.baseplatform.common.model.GlobalProperty">
+        UPDATE `T_SYS_GLOBAL_PROPERTY` TSGP
+        <set>
+            <if test="globalProperty.propertyCode != null and globalProperty.propertyCode != ''">
+                TSGP.`propertyCode`=#{globalProperty.propertyCode},
+            </if>
+            <if test="globalProperty.propertyCnName != null and globalProperty.propertyCnName != ''">
+                TSGP.`propertyCnName`=#{globalProperty.propertyCnName},
+            </if>
+            <if test="globalProperty.propertyEnName != null and globalProperty.propertyEnName != ''">
+                TSGP.`propertyEnName`=#{globalProperty.propertyEnName},
+            </if>
+            <if test="globalProperty.propertyValue != null and globalProperty.propertyValue != ''">
+                TSGP.`propertyValue`=#{globalProperty.propertyValue},
+            </if>
+            <if test="globalProperty.remark != null and globalProperty.remark != ''">
+                TSGP.`remark`=#{globalProperty.remark},
+            </if>
+            <if test="globalProperty.projectKz1 != null and globalProperty.projectKz1 != ''">
+                TSGP.`projectKz1`=#{globalProperty.projectKz1},
+            </if>
+            <if test="globalProperty.projectKz2 != null and globalProperty.projectKz2 != ''">
+                TSGP.`projectKz2`=#{globalProperty.projectKz2},
+            </if>
+            <if test="globalProperty.projectKz3 != null and globalProperty.projectKz3 != ''">
+                TSGP.`projectKz3`=#{globalProperty.projectKz3},
+            </if>
+        </set>
+        TSGP.`id`=#{globalProperty.id}
+    </update>
+
+    <!--删除全局属性-->
+    <update id="deleteGlobalProperty" parameterType="string">
+        UPDATE `T_SYS_GLOBAL_PROPERTY` TSGP SET TSGP.`logicDel`='Y' WHERE TSGP.`id`=#{globalPropertyId}
+    </update>
+
+    <!--激活全局属性-->
+    <update id="activeGlobalProperty" parameterType="string">
+        UPDATE `T_SYS_GLOBAL_PROPERTY` TSGP SET TSGP.`isOpen`=1 WHERE TSGP.`id`=#{globalPropertyId}
+    </update>
+
+    <!--禁用全局属性-->
+    <update id="disableGlobalProperty" parameterType="string">
+        UPDATE `T_SYS_GLOBAL_PROPERTY` TSGP SET TSGP.`isOpen`=0 WHERE TSGP.`id`=#{globalPropertyId}
+    </update>
+
+    <!--查询全局属性详情-->
+    <select id="findGlobalPropertyById" parameterType="string" resultType="com.sly.baseplatform.common.model.GlobalProperty">
+        SELECT * FROM `T_SYS_GLOBAL_PROPERTY` TSGP WHERE TSGP.`id`=#{globalPropertyId}
+    </select>
+
+    <!--查询全局属性列表-->
+    <select id="findGlobalPropertyList" parameterType="com.sly.baseplatform.common.model.GlobalProperty" resultType="com.sly.baseplatform.common.model.GlobalProperty">
+        SELECT * FROM `T_SYS_GLOBAL_PROPERTY` TSGP
+        <where>
+            TSGP.`logicDel`='N'
+            <if test="propertyCode != null and propertyCode != ''">
+                AND TSGP.`propertyCode` LIKE CONCAT('%',#{propertyCode},'%')
+            </if>
+            <if test="propertyCnName != null and propertyCnName != ''">
+                AND TSGP.`propertyCnName` LIKE CONCAT('%',#{propertyCnName},'%')
+            </if>
+            <if test="propertyEnName != null and propertyEnName != ''">
+                AND TSGP.`propertyEnName` LIKE CONCAT('%',#{propertyEnName},'%')
+            </if>
+            <if test="propertyValue != null and propertyValue != ''">
+                AND TSGP.`propertyValue` LIKE CONCAT('%',#{propertyValue},'%')
+            </if>
+        </where>
+        ORDER BY TSGP.`createTime` DESC
+    </select>
+
+
 </mapper>

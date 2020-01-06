@@ -1,10 +1,10 @@
 package com.sly.baseplatform.system.service.impl;
 
+import com.sly.baseplatform.common.constant.Status;
 import com.sly.baseplatform.common.model.Role;
 import com.sly.baseplatform.system.mapper.RoleMapper;
 import com.sly.baseplatform.system.service.RoleService;
 import com.sly.plugin.common.result.BaseResult;
-import com.sly.plugin.common.result.ResultStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,30 +27,36 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public BaseResult addRole(@RequestBody Role role) {
         roleMapper.insert(role);
-        return new BaseResult(ResultStatus.SAVE_SUCCESS);
+        return new BaseResult(Status.SAVE_SUCCESS);
     }
 
     @Override
     public BaseResult updateRole(@RequestBody Role role) {
         roleMapper.updateRole(role);
-        return new BaseResult(ResultStatus.UPDATE_SUCCESS);
+        return new BaseResult(Status.UPDATE_SUCCESS);
     }
 
     @Override
     public BaseResult deleteRole(@RequestParam("roleId") String roleId) {
         roleMapper.deleteRole(roleId);
-        return new BaseResult(ResultStatus.DELETE_SUCCESS);
+        return new BaseResult(Status.DELETE_SUCCESS);
     }
 
     @Override
     public BaseResult activeRole(@RequestParam("roleId") String roleId) {
         roleMapper.activeRole(roleId);
-        return new BaseResult(ResultStatus.UPDATE_SUCCESS);
+        return new BaseResult(Status.ACTIVE_SUCCESS);
     }
 
     @Override
     public BaseResult disableRole(@RequestParam("roleId") String roleId) {
         roleMapper.disableRole(roleId);
-        return new BaseResult(ResultStatus.UPDATE_SUCCESS);
+        return new BaseResult(Status.DISABLE_SUCCESS);
+    }
+
+    @Override
+    public BaseResult findRoleDetail(@RequestParam("roleId") String roleId) {
+        Role role = roleMapper.findRoleById(roleId);
+        return new BaseResult(Status.QUERY_SUCCESS, "role", role);
     }
 }

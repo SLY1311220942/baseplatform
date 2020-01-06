@@ -1,17 +1,17 @@
 package com.sly.baseplatform.business.system.controller;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
 import com.sly.baseplatform.common.BaseController;
+import com.sly.baseplatform.common.constant.Status;
 import com.sly.baseplatform.common.model.Role;
 import com.sly.baseplatform.system.service.RoleService;
 import com.sly.plugin.common.result.BaseResult;
-import com.sly.plugin.common.result.ResultStatus;
 import com.sly.plugin.validate.annotation.Valid;
 import com.sly.plugin.validate.annotation.Validate;
 import com.sly.plugin.validate.constraints.NotBlank;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -128,7 +128,7 @@ public class RoleController extends BaseController {
             return roleService.addRole(role);
         } catch (Exception e) {
             log.error("新增角色异常：{}", ExceptionUtils.getStackTrace(e));
-            return new BaseResult(ResultStatus.SAVE_FAILED);
+            return new BaseResult(Status.SAVE_FAILED);
         }
     }
 
@@ -148,7 +148,7 @@ public class RoleController extends BaseController {
             return roleService.updateRole(role);
         } catch (Exception e) {
             log.error("修改角色异常：{}", ExceptionUtils.getStackTrace(e));
-            return new BaseResult(ResultStatus.UPDATE_FAILED);
+            return new BaseResult(Status.UPDATE_FAILED);
         }
     }
 
@@ -168,7 +168,7 @@ public class RoleController extends BaseController {
             return roleService.deleteRole(roleId);
         } catch (Exception e) {
             log.error("删除角色异常：{}", ExceptionUtils.getStackTrace(e));
-            return new BaseResult(ResultStatus.DELETE_FAILED);
+            return new BaseResult(Status.DELETE_FAILED);
         }
     }
 
@@ -188,7 +188,7 @@ public class RoleController extends BaseController {
             return roleService.activeRole(roleId);
         } catch (Exception e) {
             log.error("激活角色异常：{}", ExceptionUtils.getStackTrace(e));
-            return new BaseResult(ResultStatus.UPDATE_FAILED);
+            return new BaseResult(Status.ACTIVE_FAILED);
         }
     }
 
@@ -208,7 +208,27 @@ public class RoleController extends BaseController {
             return roleService.disableRole(roleId);
         } catch (Exception e) {
             log.error("禁用角色异常：{}", ExceptionUtils.getStackTrace(e));
-            return new BaseResult(ResultStatus.UPDATE_FAILED);
+            return new BaseResult(Status.DISABLE_FAILED);
+        }
+    }
+
+    /**
+     * 查询角色详情
+     *
+     * @param roleId
+     * @return
+     * @author SLY
+     * @time 2020/1/6
+     */
+    @Validate
+    @ResponseBody
+    @RequestMapping("/findRoleDetail")
+    public BaseResult findRoleDetail(@NotBlank(message = "角色id不能为空！") String roleId) {
+        try {
+            return roleService.findRoleDetail(roleId);
+        } catch (Exception e) {
+            log.error("查询角色详情异常：{}", ExceptionUtils.getStackTrace(e));
+            return new BaseResult(Status.QUERY_FAILED);
         }
     }
 }

@@ -1,10 +1,10 @@
 package com.sly.baseplatform.business.system.controller;
 
 import com.sly.baseplatform.common.BaseController;
+import com.sly.baseplatform.common.constant.Status;
 import com.sly.baseplatform.common.model.User;
 import com.sly.baseplatform.system.service.UserService;
 import com.sly.plugin.common.result.BaseResult;
-import com.sly.plugin.common.result.ResultStatus;
 import com.sly.plugin.validate.annotation.Valid;
 import com.sly.plugin.validate.annotation.Validate;
 import com.sly.plugin.validate.constraints.NotBlank;
@@ -114,7 +114,7 @@ public class UserController extends BaseController {
             return userService.findUserDetail(userId);
         } catch (Exception e) {
             log.error("查询用户详情异常：{}", ExceptionUtils.getStackTrace(e));
-            return new BaseResult(ResultStatus.QUERY_FAILED);
+            return new BaseResult(Status.QUERY_FAILED);
         }
     }
 
@@ -133,7 +133,7 @@ public class UserController extends BaseController {
             return userService.findUserList(user);
         } catch (Exception e) {
             log.error("查询用户列表异常：{}", ExceptionUtils.getStackTrace(e));
-            return new BaseResult(ResultStatus.QUERY_FAILED);
+            return new BaseResult(Status.QUERY_FAILED);
         }
     }
 
@@ -153,7 +153,7 @@ public class UserController extends BaseController {
             return userService.addUser(user);
         } catch (Exception e) {
             log.error("新增用户异常：{}", ExceptionUtils.getStackTrace(e));
-            return new BaseResult(ResultStatus.SAVE_FAILED);
+            return new BaseResult(Status.SAVE_FAILED);
         }
     }
 
@@ -173,7 +173,7 @@ public class UserController extends BaseController {
             return userService.updateUser(user);
         } catch (Exception e) {
             log.error("修改用户异常：{}", ExceptionUtils.getStackTrace(e));
-            return new BaseResult(ResultStatus.UPDATE_FAILED);
+            return new BaseResult(Status.UPDATE_FAILED);
         }
     }
 
@@ -193,7 +193,7 @@ public class UserController extends BaseController {
             return userService.deleteUser(userId);
         } catch (Exception e) {
             log.error("删除用户异常：{}", ExceptionUtils.getStackTrace(e));
-            return new BaseResult(ResultStatus.DELETE_FAILED);
+            return new BaseResult(Status.DELETE_FAILED);
         }
     }
 
@@ -213,7 +213,7 @@ public class UserController extends BaseController {
             return userService.activeUser(userId);
         } catch (Exception e) {
             log.error("激活用户异常：{}", ExceptionUtils.getStackTrace(e));
-            return new BaseResult(ResultStatus.UPDATE_FAILED);
+            return new BaseResult(Status.ACTIVE_FAILED);
         }
     }
 
@@ -233,7 +233,7 @@ public class UserController extends BaseController {
             return userService.disableUser(userId);
         } catch (Exception e) {
             log.error("禁用用户异常：{}", ExceptionUtils.getStackTrace(e));
-            return new BaseResult(ResultStatus.UPDATE_FAILED);
+            return new BaseResult(Status.DISABLE_FAILED);
         }
     }
 }

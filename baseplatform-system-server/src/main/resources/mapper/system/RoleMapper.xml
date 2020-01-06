@@ -37,5 +37,10 @@
         UPDATE `T_SYS_ROLE` TSR SET TSR.`isOpen`=0 WHERE TSR.`id`=#{roleId}
     </update>
 
+    <!--根据id查询角色-->
+    <select id="findRoleById" resultType="com.sly.baseplatform.common.model.Role">
+        SELECT * FROM `T_SYS_ROLE` TSR WHERE TSR.`id`=#{roleId}
+    </select>
+
 
 </mapper>

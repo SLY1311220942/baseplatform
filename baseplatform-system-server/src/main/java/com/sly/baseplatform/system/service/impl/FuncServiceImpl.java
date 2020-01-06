@@ -1,16 +1,15 @@
 package com.sly.baseplatform.system.service.impl;
 
+import com.sly.baseplatform.common.constant.Status;
 import com.sly.baseplatform.common.model.Func;
 import com.sly.baseplatform.system.mapper.FuncMapper;
 import com.sly.baseplatform.system.mapper.OperateLogMapper;
 import com.sly.baseplatform.system.service.FuncService;
 import com.sly.plugin.common.result.BaseResult;
-import com.sly.plugin.common.result.ResultStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -40,7 +39,7 @@ public class FuncServiceImpl implements FuncService {
                 func.setChild(childFunc);
             }
         }
-        return new BaseResult(ResultStatus.QUERY_SUCCESS, "funcs", topFunc);
+        return new BaseResult(Status.QUERY_SUCCESS, "funcs", topFunc);
     }
 
     @Override
@@ -52,37 +51,37 @@ public class FuncServiceImpl implements FuncService {
                 func.setChild(childFunc);
             }
         }
-        return new BaseResult(ResultStatus.QUERY_SUCCESS, "funcs", topFunc);
+        return new BaseResult(Status.QUERY_SUCCESS, "funcs", topFunc);
     }
 
     @Override
     public BaseResult findAllChildFunc(@RequestParam("funcId") String funcId) {
         List<Func> list = funcMapper.findAllChildFunc(funcId);
-        return new BaseResult(ResultStatus.QUERY_SUCCESS, "funcs", list);
+        return new BaseResult(Status.QUERY_SUCCESS, "funcs", list);
     }
 
     @Override
     public BaseResult findFuncDetail(@RequestParam("funcId") String funcId) {
         Func func = funcMapper.findFuncById(funcId);
-        return new BaseResult(ResultStatus.QUERY_SUCCESS, "func", func);
+        return new BaseResult(Status.QUERY_SUCCESS, "func", func);
     }
 
     @Override
     public BaseResult addFunc(@RequestBody Func func) {
         funcMapper.insert(func);
-        return new BaseResult(ResultStatus.SAVE_SUCCESS);
+        return new BaseResult(Status.SAVE_SUCCESS);
     }
 
     @Override
     public BaseResult updateFunc(@RequestBody Func func) {
         funcMapper.updateFunc(func);
-        return new BaseResult(ResultStatus.UPDATE_SUCCESS);
+        return new BaseResult(Status.UPDATE_SUCCESS);
     }
 
     @Override
     public BaseResult deleteFunc(@RequestParam("funcId") String funcId) {
         funcMapper.deleteFunc(funcId);
-        return new BaseResult(ResultStatus.DELETE_SUCCESS);
+        return new BaseResult(Status.DELETE_SUCCESS);
     }
 
     /**

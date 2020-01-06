@@ -69,4 +69,15 @@ public interface RoleService {
      */
     @RequestMapping(value = "/role/disableRole", method = RequestMethod.POST)
     BaseResult disableRole(@RequestParam("roleId") String roleId);
+
+    /**
+     * 查询角色详情
+     *
+     * @param roleId
+     * @return
+     * @author SLY
+     * @time 2020/1/6
+     */
+    @RequestMapping(value = "/role/findRoleDetail", method = RequestMethod.POST)
+    BaseResult findRoleDetail(@RequestParam("roleId") String roleId);
 }

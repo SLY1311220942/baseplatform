@@ -1,9 +1,9 @@
 package com.sly.baseplatform.system.service.impl;
 
+import com.sly.baseplatform.common.constant.Status;
 import com.sly.baseplatform.common.model.User;
 import com.sly.baseplatform.system.service.UserService;
 import com.sly.plugin.common.result.BaseResult;
-import com.sly.plugin.common.result.ResultStatus;
 import org.springframework.stereotype.Component;
 
 /**
@@ -17,36 +17,36 @@ public class UserServiceHystrixImpl implements UserService {
 
     @Override
     public BaseResult findUserDetail(String userId) {
-        return new BaseResult(ResultStatus.FAILED);
+        return new BaseResult(Status.FAILED);
     }
 
     @Override
     public BaseResult findUserList(User user) {
-        return new BaseResult(ResultStatus.FAILED);
+        return new BaseResult(Status.FAILED);
     }
 
     @Override
     public BaseResult addUser(User user) {
-        return new BaseResult(ResultStatus.FAILED);
+        return new BaseResult(Status.FAILED);
     }
 
     @Override
     public BaseResult updateUser(User user) {
-        return new BaseResult(ResultStatus.FAILED);
+        return new BaseResult(Status.FAILED);
     }
 
     @Override
     public BaseResult deleteUser(String userId) {
-        return new BaseResult(ResultStatus.FAILED);
+        return new BaseResult(Status.FAILED);
     }
 
     @Override
     public BaseResult activeUser(String userId) {
-        return new BaseResult(ResultStatus.FAILED);
+        return new BaseResult(Status.FAILED);
     }
 
     @Override
     public BaseResult disableUser(String userId) {
-        return new BaseResult(ResultStatus.FAILED);
+        return new BaseResult(Status.FAILED);
     }
 }
