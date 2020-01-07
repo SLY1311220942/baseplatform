@@ -5,6 +5,8 @@ import com.sly.plugin.common.model.BaseModel;
 import lombok.Data;
 
 /**
+ * 角色功能关系model
+ *
  * @author SLY
  * @time 2019/12/19
  */

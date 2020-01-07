@@ -4,6 +4,8 @@ import com.sly.plugin.common.model.BaseModel;
 import lombok.Data;
 
 /**
+ * 用户角色关系model
+ *
  * @author SLY
  * @time 2019/12/19
  */

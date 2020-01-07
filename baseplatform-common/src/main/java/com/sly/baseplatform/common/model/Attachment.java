@@ -6,6 +6,8 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 /**
+ * 附件model
+ *
  * @author SLY
  * @time 2019/12/19
  */

@@ -231,4 +231,23 @@ public class RoleController extends BaseController {
             return new BaseResult(Status.QUERY_FAILED);
         }
     }
+
+    /**
+     * 查询角色列表
+     *
+     * @param role
+     * @return
+     * @author SLY
+     * @time 2020/1/7
+     */
+    @ResponseBody
+    @RequestMapping("/findRoleList")
+    public BaseResult findRoleList(Role role) {
+        try {
+            return roleService.findRoleList(role);
+        } catch (Exception e) {
+            log.error("查询角色列表异常：{}", ExceptionUtils.getStackTrace(e));
+            return new BaseResult(Status.QUERY_FAILED);
+        }
+    }
 }

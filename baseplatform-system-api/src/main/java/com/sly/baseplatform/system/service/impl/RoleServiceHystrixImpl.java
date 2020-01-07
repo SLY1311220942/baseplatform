@@ -44,4 +44,9 @@ public class RoleServiceHystrixImpl implements RoleService {
     public BaseResult findRoleDetail(String roleId) {
         return new BaseResult(Status.FAILED);
     }
+
+    @Override
+    public BaseResult findRoleList(Role role) {
+        return new BaseResult(Status.FAILED);
+    }
 }

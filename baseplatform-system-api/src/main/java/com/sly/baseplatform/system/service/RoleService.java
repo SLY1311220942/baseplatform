@@ -80,4 +80,15 @@ public interface RoleService {
      */
     @RequestMapping(value = "/role/findRoleDetail", method = RequestMethod.POST)
     BaseResult findRoleDetail(@RequestParam("roleId") String roleId);
+
+    /**
+     * 查询角色列表
+     *
+     * @param role
+     * @return
+     * @author SLY
+     * @time 2020/1/7
+     */
+    @RequestMapping(value = "/role/findRoleList", method = RequestMethod.POST)
+    BaseResult findRoleList(@RequestBody Role role);
 }

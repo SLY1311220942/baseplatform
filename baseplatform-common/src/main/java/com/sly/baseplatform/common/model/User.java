@@ -5,6 +5,8 @@ import com.sly.plugin.validate.constraints.*;
 import lombok.Data;
 
 /**
+ * 用户model
+ *
  * @author SLY
  * @time 2019/12/19
  */
@@ -82,6 +84,6 @@ public class User extends BaseModel {
     /**
      * remark varchar(240) NULL备注
      */
-    @Size(message = "备注最大为240个字符！", group = {"addUser", "updateUser"})
+    @Size(message = "备注最大为240个字符！", max = 240, group = {"addUser", "updateUser"})
     private String remark;
 }

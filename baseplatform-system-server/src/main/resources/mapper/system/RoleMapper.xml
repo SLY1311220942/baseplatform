@@ -42,5 +42,20 @@
         SELECT * FROM `T_SYS_ROLE` TSR WHERE TSR.`id`=#{roleId}
     </select>
 
+    <!--查询角色列表-->
+    <select id="findRoleList" parameterType="com.sly.baseplatform.common.model.Role" resultType="com.sly.baseplatform.common.model.Role">
+        SELECT * FROM `T_SYS_ROLE` TSR
+        <where>
+            TSR.`logicDel`='N'
+            <if test="roleName != null and roleName != ''">
+                AND TSR.`roleName` LIKE CONCAT('%',#{},'%')
+            </if>
+            <if test="isOpen != null">
+                AND TSR.`isOpen`=#{isOpen}
+            </if>
+        </where>
+        ORDER BY TSR.`createTime` DESC
+    </select>
+
 
 </mapper>

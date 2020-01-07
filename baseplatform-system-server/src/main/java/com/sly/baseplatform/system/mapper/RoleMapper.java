@@ -1,7 +1,10 @@
 package com.sly.baseplatform.system.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sly.baseplatform.common.model.Role;
+
+import java.util.List;
 
 /**
  * 角色mapper
@@ -60,4 +63,15 @@ public interface RoleMapper extends BaseMapper<Role> {
      * @time 2020/1/6
      */
     Role findRoleById(String roleId);
+
+    /**
+     * 查询角色列表
+     *
+     * @param page
+     * @param role
+     * @return
+     * @author SLY
+     * @time 2020/1/7
+     */
+    List<Role> findRoleList(Page<Role> page, Role role);
 }

@@ -5,6 +5,8 @@ import com.sly.plugin.common.model.BaseModel;
 import lombok.Data;
 
 /**
+ * 数据字典model
+ *
  * @author SLY
  * @time 2019/12/19
  */

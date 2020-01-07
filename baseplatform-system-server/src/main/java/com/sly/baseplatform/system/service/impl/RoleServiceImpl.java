@@ -1,5 +1,6 @@
 package com.sly.baseplatform.system.service.impl;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sly.baseplatform.common.constant.Status;
 import com.sly.baseplatform.common.model.Role;
 import com.sly.baseplatform.system.mapper.RoleMapper;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 角色service实现
@@ -58,5 +60,12 @@ public class RoleServiceImpl implements RoleService {
     public BaseResult findRoleDetail(@RequestParam("roleId") String roleId) {
         Role role = roleMapper.findRoleById(roleId);
         return new BaseResult(Status.QUERY_SUCCESS, "role", role);
+    }
+
+    @Override
+    public BaseResult findRoleList(Role role) {
+        Page<Role> page = new Page<>(role.getStartNum(), role.getPageSize());
+        List<Role> list = roleMapper.findRoleList(page, role);
+        return new BaseResult(Status.QUERY_SUCCESS, page.getTotal(), list);
     }
 }

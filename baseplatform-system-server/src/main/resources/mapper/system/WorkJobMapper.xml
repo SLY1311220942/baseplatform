@@ -1,5 +1,60 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sly.baseplatform.system.mapper.WorkJobMapper">
+    <!--修改定时任务-->
+    <update id="updateWorkJob" parameterType="com.sly.baseplatform.common.model.WorkJob">
+        UPDATE `T_SYS_WORKJOB` TSW
+        <set>
+            <if test="jobName != null and jobName != ''">
+                TSW.`jobName`=#{jobName},
+            </if>
+            <if test="jobGroup != null and jobGroup != ''">
+                TSW.`jobGroup`=#{jobGroup},
+            </if>
+            <if test="jobClass != null and jobClass != ''">
+                TSW.`jobClass`=#{jobClass},
+            </if>
+            <if test="cronExpression != null and cronExpression != ''">
+                TSW.`cronExpression`=#{cronExpression},
+            </if>
+            <if test="remark != null and remark != ''">
+                TSW.`remark`=#{remark},
+            </if>
+        </set>
+        WHERE TSW.`id`=#{id}
+    </update>
 
+    <!--删除定时任务-->
+    <update id="deleteWorkJob" parameterType="string">
+        UPDATE `T_SYS_WORKJOB` TSW SET TSW.`logicDel`='Y' WHERE TSW.`id`=#{workJobId}
+    </update>
+
+    <!--根据id查询定时任务-->
+    <select id="findWorkJobById" parameterType="string" resultType="com.sly.baseplatform.common.model.WorkJob">
+        SELECT * FROM `T_SYS_WORKJOB` TSW WHERE TSW.`id`=#{workJobId}
+    </select>
+
+    <!--查询定时任务列表-->
+    <select id="findWorkJobList" parameterType="com.sly.baseplatform.common.model.WorkJob" resultType="com.sly.baseplatform.common.model.WorkJob">
+        SELECT * FROM `T_SYS_WORKJOB` TSW
+        <where>
+            TSW.`logicDel`='N'
+            <if test="jobName != null and jobName != ''">
+                AND TSW.`jobName` LIKE CONCAT('%',#{jobName},'%')
+            </if>
+            <if test="jobGroup != null and jobGroup != ''">
+                AND TSW.`jobGroup` LIKE CONCAT('%',#{jobGroup},'%')
+            </if>
+            <if test="jobClass != null and jobClass != ''">
+                AND TSW.`jobClass` LIKE CONCAT('%',#{jobClass},'%')
+            </if>
+            <if test="cronExpression != null and cronExpression != ''">
+                AND TSW.`cronExpression` LIKE CONCAT('%',#{cronExpression},'%')
+            </if>
+            <if test="scheduleState != null">
+                AND TSW.`scheduleState`=#{scheduleState}
+            </if>
+        </where>
+        ORDER BY TSW.`createtime` DESC
+    </select>
 </mapper>
