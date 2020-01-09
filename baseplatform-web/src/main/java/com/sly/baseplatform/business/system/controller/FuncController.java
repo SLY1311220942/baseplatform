@@ -205,4 +205,44 @@ public class FuncController extends BaseController {
             return new BaseResult(Status.DELETE_FAILED);
         }
     }
+
+    /**
+     * 激活功能
+     *
+     * @param funcId
+     * @return
+     * @author SLY
+     * @time 2020/1/9
+     */
+    @Validate
+    @ResponseBody
+    @RequestMapping("/activeFunc")
+    public BaseResult activeFunc(@NotBlank(message = "功能id不能为空！") String funcId) {
+        try {
+            return funcService.activeFunc(funcId);
+        } catch (Exception e) {
+            log.error("激活功能异常：{}", ExceptionUtils.getStackTrace(e));
+            return new BaseResult(Status.ACTIVE_FAILED);
+        }
+    }
+
+    /**
+     * 禁用功能
+     *
+     * @param funcId
+     * @return
+     * @author SLY
+     * @time 2020/1/9
+     */
+    @Validate
+    @ResponseBody
+    @RequestMapping("/disableFunc")
+    public BaseResult disableFunc(@NotBlank(message = "功能id不能为空！") String funcId) {
+        try {
+            return funcService.disableFunc(funcId);
+        } catch (Exception e) {
+            log.error("禁用功能异常：{}", ExceptionUtils.getStackTrace(e));
+            return new BaseResult(Status.DISABLE_FAILED);
+        }
+    }
 }

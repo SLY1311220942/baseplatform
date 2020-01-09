@@ -50,4 +50,14 @@ public class FuncServiceHystrixImpl implements FuncService {
         return new BaseResult(Status.FAILED);
     }
 
+    @Override
+    public BaseResult activeFunc(String funcId) {
+        return new BaseResult(Status.FAILED);
+    }
+
+    @Override
+    public BaseResult disableFunc(String funcId) {
+        return new BaseResult(Status.FAILED);
+    }
+
 }

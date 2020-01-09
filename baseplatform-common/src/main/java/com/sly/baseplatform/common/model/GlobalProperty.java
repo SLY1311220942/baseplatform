@@ -61,13 +61,16 @@ public class GlobalProperty extends BaseModel {
     /**
      * projectKz1 varchar(32) NULL备用字段1
      */
+    @Size(message = "备用字段1最大为32个字符！", max = 32, group = {"addGlobalProperty", "updateGlobalProperty"})
     private String projectKz1;
     /**
      * projectKz2 varchar(32) NULL备用字段2
      */
+    @Size(message = "备用字段2最大为32个字符！", max = 32, group = {"addGlobalProperty", "updateGlobalProperty"})
     private String projectKz2;
     /**
      * projectKz3 varchar(32) NULL备用字段3
      */
+    @Size(message = "备用字段3最大为32个字符！", max = 32, group = {"addGlobalProperty", "updateGlobalProperty"})
     private String projectKz3;
 }

@@ -93,4 +93,24 @@ public interface FuncMapper extends BaseMapper<Func> {
      * @time 2020/1/2
      */
     int deleteFunc(String funcId);
+
+    /**
+     * 激活功能
+     *
+     * @param funcId
+     * @return
+     * @author SLY
+     * @time 2020/1/9
+     */
+    int activeFunc(String funcId);
+
+    /**
+     * 禁用功能
+     *
+     * @param funcId
+     * @return
+     * @author SLY
+     * @time 2020/1/9
+     */
+    int disableFunc(String funcId);
 }

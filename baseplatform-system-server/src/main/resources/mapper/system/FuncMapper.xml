@@ -115,4 +115,14 @@
         UPDATE `T_SYS_FUNC` TSF SET TSF.`logicDel`='Y' WHERE TSF.`id`=#{funcId}
     </update>
 
+    <!--激活功能-->
+    <update id="activeFunc" parameterType="string">
+        UPDATE `T_SYS_FUNC` TSF SET TSF.`isOpen`=1 WHERE TSF.`id`=#{funcId}
+    </update>
+
+    <!--禁用功能-->
+    <update id="disableFunc" parameterType="string">
+        UPDATE `T_SYS_FUNC` TSF SET TSF.`isOpen`=0 WHERE TSF.`id`=#{funcId}
+    </update>
+
 </mapper>

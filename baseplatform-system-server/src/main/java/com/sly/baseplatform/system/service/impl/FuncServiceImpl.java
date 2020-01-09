@@ -84,6 +84,18 @@ public class FuncServiceImpl implements FuncService {
         return new BaseResult(Status.DELETE_SUCCESS);
     }
 
+    @Override
+    public BaseResult activeFunc(String funcId) {
+        funcMapper.activeFunc(funcId);
+        return new BaseResult(Status.ACTIVE_SUCCESS);
+    }
+
+    @Override
+    public BaseResult disableFunc(String funcId) {
+        funcMapper.disableFunc(funcId);
+        return new BaseResult(Status.DISABLE_SUCCESS);
+    }
+
     /**
      * 查询用户最上层菜单
      *

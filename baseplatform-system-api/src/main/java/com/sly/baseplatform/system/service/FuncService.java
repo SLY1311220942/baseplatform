@@ -93,5 +93,27 @@ public interface FuncService {
      * @time 2020/1/2
      */
     @RequestMapping(value = "/func/deleteFunc", method = RequestMethod.POST)
-    BaseResult deleteFunc(@RequestParam("/funcId") String funcId);
+    BaseResult deleteFunc(@RequestParam("funcId") String funcId);
+
+    /**
+     * 激活功能
+     *
+     * @param funcId
+     * @return
+     * @author SLY
+     * @time 2020/1/9
+     */
+    @RequestMapping(value = "/func/activeFunc", method = RequestMethod.POST)
+    BaseResult activeFunc(@RequestParam("funcId") String funcId);
+
+    /**
+     * 禁用功能
+     *
+     * @param funcId
+     * @return
+     * @author SLY
+     * @time 2020/1/9
+     */
+    @RequestMapping(value = "/func/disableFunc", method = RequestMethod.POST)
+    BaseResult disableFunc(@RequestParam("funcId") String funcId);
 }

@@ -2,4 +2,91 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sly.baseplatform.system.mapper.DicCodeMapper">
 
+    <!--修改数据字典-->
+    <update id="updateDicCode" parameterType="com.sly.baseplatform.common.model.DicCode">
+        UPDATE `T_SYS_DICCODE` TSD
+        <set>
+            <if test="dicCode != null and dicCode != ''">
+                TSD.`dicCode`=#{dicCode},
+            </if>
+            <if test="cnName != null">
+                TSD.`cnName`=#{cnName},
+            </if>
+            <if test="enName != null">
+                TSD.`enName`=#{enName},
+            </if>
+            <if test="value != null">
+                TSD.`value`=#{value},
+            </if>
+            <if test="sort != null">
+                TSD.`sort`=#{sort},
+            </if>
+            <if test="remark != null">
+                TSD.`remark`=#{remark},
+            </if>
+            <if test="isOpen != null">
+                TSD.`isOpen`=#{isOpen},
+            </if>
+            <if test="projectKz1 != null">
+                TSD.`projectKz1`=#{projectKz1},
+            </if>
+            <if test="projectKz2 != null">
+                TSD.`projectKz2`=#{projectKz2},
+            </if>
+            <if test="projectKz3 != null">
+                TSD.`projectKz3`=#{projectKz3},
+            </if>
+        </set>
+        WHERE TSD.`id`=#{id}
+    </update>
+
+    <!--删除数据字典-->
+    <update id="deleteDicCode" parameterType="int">
+        UPDATE `T_SYS_DICCODE` TSD SET TSD.`logicDel`='Y' WHERE TSD.`id`=#{id}
+    </update>
+
+    <!--激活数据字典-->
+    <update id="activeDicCode" parameterType="int">
+        UPDATE `T_SYS_DICCODE` TSD SET TSD.`isOpen`=1 WHERE TSD.`id`=#{id}
+    </update>
+
+    <!--禁用数据字典-->
+    <update id="disableDicCode" parameterType="int">
+        UPDATE `T_SYS_DICCODE` TSD SET TSD.`isOpen`=0 WHERE TSD.`id`=#{id}
+    </update>
+
+    <!--根据id查询数据字典-->
+    <select id="findDicCodeDetail" parameterType="int" resultType="com.sly.baseplatform.common.model.DicCode">
+        SELECT * FROM `T_SYS_DICCODE` TSD WHERE TSD.`id`=#{id}
+    </select>
+
+    <!--查询下级数据字典-->
+    <select id="findChildDicCode" parameterType="com.sly.baseplatform.common.model.DicCode" resultType="com.sly.baseplatform.common.model.DicCode">
+        SELECT * FROM `T_SYS_DICCODE` TSD
+        <where>
+            TSD.`logicDel`='N'
+            <choose>
+                <when test="dicCode != null and dicCode != ''">
+                    AND TSD.`parentDicCode`='dicCode'
+                </when>
+                <otherwise>
+                    AND (TSD.`parentDicCode` IS NULL OR TSD.`parentDicCode`='')
+                </otherwise>
+            </choose>
+        </where>
+        ORDER BY TSD.`sort` ASC
+    </select>
+
+    <!--查询全部下级数据字典(只查询有效的)-->
+    <select id="findAllChildDicCode" parameterType="string" resultType="com.sly.baseplatform.common.model.DicCode">
+        SELECT * FROM `T_SYS_DICCODE` TSD
+        <where>
+            TSD.`logicDel`='N'
+            AND TSD.`isOpen`=1
+            <if test="dicCode != null and dicCode != ''">
+                AND TSD.`parentDicCode`=#{dicCode}
+            </if>
+        </where>
+        ORDER BY TSD.`sort` ASC
+    </select>
 </mapper>

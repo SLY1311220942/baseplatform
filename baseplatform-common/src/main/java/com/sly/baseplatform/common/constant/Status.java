@@ -58,6 +58,14 @@ public enum Status implements IStatus {
      */
     ACTIVE_FAILED(400, "激活失败！"),
     /**
+     * 保存成功返回信息:"禁用成功!"
+     */
+    FORBID_SUCCESS(200, "禁用成功！"),
+    /**
+     * 保存失败返回信息:"禁用失败!"
+     */
+    FORBID_FAILED(400, "禁用失败！"),
+    /**
      * 保存成功返回信息:"保存成功!"
      */
     DISABLE_SUCCESS(200, "禁用成功！"),
