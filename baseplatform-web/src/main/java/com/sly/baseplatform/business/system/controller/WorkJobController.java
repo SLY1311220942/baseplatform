@@ -135,7 +135,7 @@ public class WorkJobController extends BaseController {
      */
     @Validate
     @ResponseBody
-    @RequestMapping("/updateWorkJob")
+    @RequestMapping("/deleteWorkJob")
     public BaseResult deleteWorkJob(@NotBlank(message = "定时任务id不能为空！") String workJobId) {
         try {
             return workJobService.deleteWorkJob(workJobId);

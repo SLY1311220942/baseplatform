@@ -1,0 +1,11 @@
+/baseplatform.iml
+/.idea/
+/baseplatform-common/target/classes/com/sly/baseplatform/common/
+/baseplatform-common/baseplatform-common.iml
+/baseplatform-eureka/target/classes/
+/baseplatform-eureka/baseplatform-eureka.iml
+/baseplatform-system-api/target/classes/com/sly/baseplatform/system/
+/baseplatform-system-api/baseplatform-system-api.iml
+/baseplatform-system-server/baseplatform-system-server.iml
+/baseplatform-web/target/
+/baseplatform-web/baseplatform-web.iml
