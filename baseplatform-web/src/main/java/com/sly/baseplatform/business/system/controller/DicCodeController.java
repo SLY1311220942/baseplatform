@@ -11,6 +11,7 @@ import com.sly.plugin.validate.annotation.Validate;
 import com.sly.plugin.validate.constraints.NotBlank;
 import com.sly.plugin.validate.constraints.NotNull;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -81,6 +82,7 @@ public class DicCodeController extends BaseController {
     @Validate
     @ResponseBody
     @RequestMapping("/addDicCode")
+    @RequiresPermissions("/addDicCode")
     public BaseResult addDicCode(@Valid("addDicCode") DicCode dicCode) {
         try {
             return dicCodeService.addDicCode(dicCode);
@@ -101,6 +103,7 @@ public class DicCodeController extends BaseController {
     @Validate
     @ResponseBody
     @RequestMapping("/updateDicCode")
+    @RequiresPermissions("/updateDicCode")
     public BaseResult updateDicCode(@Valid("updateDicCode") DicCode dicCode) {
         try {
             return dicCodeService.updateDicCode(dicCode);
@@ -121,6 +124,7 @@ public class DicCodeController extends BaseController {
     @Validate
     @ResponseBody
     @RequestMapping("/deleteDicCode")
+    @RequiresPermissions("/deleteDicCode")
     public BaseResult deleteDicCode(@NotNull(message = "数据字典id不能为空！") Integer dicCodeId) {
         try {
             return dicCodeService.deleteDicCode(dicCodeId);
@@ -141,6 +145,7 @@ public class DicCodeController extends BaseController {
     @Validate
     @ResponseBody
     @RequestMapping("/activeDicCode")
+    @RequiresPermissions("/activeDicCode")
     public BaseResult activeDicCode(@NotNull(message = "数据字典id不能为空！") Integer dicCodeId) {
         try {
             return dicCodeService.activeDicCode(dicCodeId);
@@ -161,6 +166,7 @@ public class DicCodeController extends BaseController {
     @Validate
     @ResponseBody
     @RequestMapping("/disableDicCode")
+    @RequiresPermissions("/disableDicCode")
     public BaseResult disableDicCode(@NotNull(message = "数据字典id不能为空！") Integer dicCodeId) {
         try {
             return dicCodeService.disableDicCode(dicCodeId);

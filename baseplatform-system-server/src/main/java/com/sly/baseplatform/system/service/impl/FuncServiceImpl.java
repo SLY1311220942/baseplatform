@@ -96,6 +96,13 @@ public class FuncServiceImpl implements FuncService {
         return new BaseResult(Status.DISABLE_SUCCESS);
     }
 
+    @Override
+    public BaseResult findUserAllFuncs(String userId) {
+        // 先从缓存里找，找不到就去查。
+        List<Func> list = funcMapper.findUserAllFunc(userId);
+        return new BaseResult(Status.QUERY_SUCCESS, "funcs", list);
+    }
+
     /**
      * 查询用户最上层菜单
      *

@@ -116,4 +116,14 @@ public interface FuncService {
      */
     @RequestMapping(value = "/func/disableFunc", method = RequestMethod.POST)
     BaseResult disableFunc(@RequestParam("funcId") String funcId);
+
+    /**
+     * 获取用户所有功能
+     *
+     * @param
+     * @return
+     * @author SLY
+     * @time 2020/1/10
+     */
+    BaseResult findUserAllFuncs(@RequestParam("userId") String userId);
 }

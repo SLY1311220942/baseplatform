@@ -60,4 +60,9 @@ public class FuncServiceHystrixImpl implements FuncService {
         return new BaseResult(Status.FAILED);
     }
 
+    @Override
+    public BaseResult findUserAllFuncs(String userId) {
+        return new BaseResult(Status.FAILED);
+    }
+
 }

@@ -71,4 +71,10 @@ public class UserServiceImpl implements UserService {
         userMapper.disableUser(userId);
         return new BaseResult(Status.DISABLE_SUCCESS);
     }
+
+    @Override
+    public BaseResult findUserByUsername(@RequestParam("username") String username) {
+        User user = userMapper.findUserByUsername(username);
+        return new BaseResult(Status.QUERY_SUCCESS, "user", user);
+    }
 }

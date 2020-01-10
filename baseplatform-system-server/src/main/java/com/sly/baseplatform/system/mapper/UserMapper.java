@@ -73,4 +73,14 @@ public interface UserMapper extends BaseMapper<User> {
      * @time 2020/1/2
      */
     int disableUser(String userId);
+
+    /**
+     * 根据用户名称查询用户
+     *
+     * @param username
+     * @return
+     * @author SLY
+     * @time 2020/1/10
+     */
+    User findUserByUsername(String username);
 }

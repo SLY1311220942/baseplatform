@@ -94,4 +94,15 @@ public interface UserService {
      */
     @RequestMapping(value = "/user/disableUser", method = RequestMethod.POST)
     BaseResult disableUser(@RequestParam("userId") String userId);
+
+    /**
+     * 根据用户名查询用户信息
+     *
+     * @param username
+     * @return
+     * @author SLY
+     * @time 2020/1/10
+     */
+    @RequestMapping(value = "/user/findUserByUsername", method = RequestMethod.POST)
+    BaseResult findUserByUsername(@RequestParam("username") String username);
 }

@@ -49,4 +49,9 @@ public class UserServiceHystrixImpl implements UserService {
     public BaseResult disableUser(String userId) {
         return new BaseResult(Status.FAILED);
     }
+
+    @Override
+    public BaseResult findUserByUsername(String username) {
+        return new BaseResult(Status.FAILED);
+    }
 }

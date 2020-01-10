@@ -10,6 +10,7 @@ import com.sly.plugin.validate.annotation.Valid;
 import com.sly.plugin.validate.annotation.Validate;
 import com.sly.plugin.validate.constraints.NotBlank;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -157,6 +158,7 @@ public class FuncController extends BaseController {
     @Validate
     @ResponseBody
     @RequestMapping("/addFunc")
+    @RequiresPermissions("/addFunc")
     public BaseResult addFunc(@Valid("addFunc") Func func) {
         try {
             return funcService.addFunc(func);
@@ -177,6 +179,7 @@ public class FuncController extends BaseController {
     @Validate
     @ResponseBody
     @RequestMapping("/updateFunc")
+    @RequiresPermissions("/updateFunc")
     public BaseResult updateFunc(@Valid("updateFunc") Func func) {
         try {
             return funcService.updateFunc(func);
@@ -197,6 +200,7 @@ public class FuncController extends BaseController {
     @Validate
     @ResponseBody
     @RequestMapping("/deleteFunc")
+    @RequiresPermissions("/deleteFunc")
     public BaseResult deleteFunc(@NotBlank(message = "功能id不能为空！") String funcId) {
         try {
             return funcService.deleteFunc(funcId);
@@ -217,6 +221,7 @@ public class FuncController extends BaseController {
     @Validate
     @ResponseBody
     @RequestMapping("/activeFunc")
+    @RequiresPermissions("/activeFunc")
     public BaseResult activeFunc(@NotBlank(message = "功能id不能为空！") String funcId) {
         try {
             return funcService.activeFunc(funcId);
@@ -237,6 +242,7 @@ public class FuncController extends BaseController {
     @Validate
     @ResponseBody
     @RequestMapping("/disableFunc")
+    @RequiresPermissions("/disableFunc")
     public BaseResult disableFunc(@NotBlank(message = "功能id不能为空！") String funcId) {
         try {
             return funcService.disableFunc(funcId);

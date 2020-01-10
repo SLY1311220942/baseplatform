@@ -1,7 +1,5 @@
 package com.sly.baseplatform.common.constant;
 
-import com.sun.xml.internal.bind.v2.model.core.ID;
-
 /**
  * 公共常量
  *
@@ -75,6 +73,19 @@ public class ComConstant {
          * 系统超级管理员ID："1"
          */
         public static final String ADMIN_ID = "1";
+    }
+
+    /**
+     * ValidateCode
+     *
+     * @author SLY
+     * @time 2020/1/10
+     */
+    public static class ValidateCode {
+        /**
+         * 登录验证码code
+         */
+        public static final String LOGIN_VALIDATECODE_KEY = "login_validatecode_key";
     }
 
 

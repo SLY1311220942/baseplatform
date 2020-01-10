@@ -78,5 +78,8 @@
         UPDATE `T_SYS_USER` TSU SET TSU.`status`=2 WHERE TSU.`id`=#{userId}
     </update>
 
-
+    <!--根据用户名称查询用户-->
+    <select id="findUserByUsername" parameterType="string" resultType="com.sly.baseplatform.common.model.User">
+        SELECT * FROM `T_SYS_USER` TSU WHERE TSU.`username`=#{username}
+    </select>
 </mapper>

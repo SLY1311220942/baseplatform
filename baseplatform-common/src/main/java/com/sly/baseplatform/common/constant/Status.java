@@ -109,6 +109,14 @@ public enum Status implements IStatus {
      * 系统错误
      */
     SYSTEM_ERROR(500, "系统错误！"),
+    /**
+     * 登录成功
+     */
+    LOGIN_SUCCESS(200, "登录成功！"),
+    /**
+     * 登录失败
+     */
+    LOGIN_FAILED(400, "登录失败！"),
     ;
     private int status;
     private String message;

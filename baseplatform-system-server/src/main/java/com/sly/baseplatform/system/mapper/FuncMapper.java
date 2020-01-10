@@ -113,4 +113,14 @@ public interface FuncMapper extends BaseMapper<Func> {
      * @time 2020/1/9
      */
     int disableFunc(String funcId);
+
+    /**
+     * 查询用户所有可用的功能
+     *
+     * @param userId
+     * @return
+     * @author SLY
+     * @time 2020/1/10
+     */
+    List<Func> findUserAllFunc(String userId);
 }

@@ -10,6 +10,8 @@ import com.sly.plugin.validate.annotation.Valid;
 import com.sly.plugin.validate.annotation.Validate;
 import com.sly.plugin.validate.constraints.NotBlank;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -123,6 +125,7 @@ public class RoleController extends BaseController {
     @Validate
     @ResponseBody
     @RequestMapping("/addRole")
+    @RequiresPermissions("/addRole")
     public BaseResult addRole(@Valid("addRole") Role role) {
         try {
             return roleService.addRole(role);
@@ -143,6 +146,7 @@ public class RoleController extends BaseController {
     @Validate
     @ResponseBody
     @RequestMapping("/updateRole")
+    @RequiresPermissions("/updateRole")
     public BaseResult updateRole(@Valid("updateRole") Role role) {
         try {
             return roleService.updateRole(role);
@@ -163,6 +167,7 @@ public class RoleController extends BaseController {
     @Validate
     @ResponseBody
     @RequestMapping("/deleteRole")
+    @RequiresPermissions("/deleteRole")
     public BaseResult deleteRole(@NotBlank(message = "角色id不能为空！") String roleId) {
         try {
             return roleService.deleteRole(roleId);
@@ -183,6 +188,7 @@ public class RoleController extends BaseController {
     @Validate
     @ResponseBody
     @RequestMapping("/activeRole")
+    @RequiresPermissions("/activeRole")
     public BaseResult activeRole(@NotBlank(message = "角色id不能为空！") String roleId) {
         try {
             return roleService.activeRole(roleId);
@@ -203,6 +209,7 @@ public class RoleController extends BaseController {
     @Validate
     @ResponseBody
     @RequestMapping("/disableRole")
+    @RequiresPermissions("/disableRole")
     public BaseResult disableRole(@NotBlank(message = "角色id不能为空！") String roleId) {
         try {
             return roleService.disableRole(roleId);

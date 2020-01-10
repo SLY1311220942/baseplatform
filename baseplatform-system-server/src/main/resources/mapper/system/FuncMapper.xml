@@ -125,4 +125,17 @@
         UPDATE `T_SYS_FUNC` TSF SET TSF.`isOpen`=0 WHERE TSF.`id`=#{funcId}
     </update>
 
+    <!--查询用户所有可用的功能-->
+    <select id="findUserAllFunc" parameterType="string" resultType="com.sly.baseplatform.common.model.Func">
+        SELECT TSF.* FROM `T_SYS_FUNC` TSF
+        LEFT JOIN `T_SYS_ROLEFUNC` TSRF ON TSRF.`funcId`=TSF.`id`
+        LEFT JOIN `T_SYS_USERROLE` TSUR ON TSUR.`roleId`=TSRF.`roleId`
+        LEFT JOIN `T_SYS_ROLE` TSR ON TSUR.`roleId`=TSR.`id`
+        WHERE
+            TSF.`logicDel`='N'
+            AND TSF.`isOpen`=1
+            AND TSR.`logicDel`='N'
+            AND TSR.`isOpen`=1
+            AND TSUR.`userId`=#{userId}
+    </select>
 </mapper>
