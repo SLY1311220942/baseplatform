@@ -9,7 +9,7 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @author SLY
  * @time 2019/12/19
  */
-@FeignClient(name = "baseplatform-system-server",fallback = AttachmentServiceHystrixImpl.class)
+@FeignClient(name = "baseplatform-system-server", fallback = AttachmentServiceHystrixImpl.class)
 public interface AttachmentService {
 
 }

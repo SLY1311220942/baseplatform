@@ -1,6 +1,7 @@
 package com.sly.baseplatform.config.shiro;
 
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.mgt.SessionsSecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -71,7 +72,7 @@ public class ShiroConfig {
      * @time 2020/1/10
      */
     @Bean
-    public SecurityManager securityManager(ShiroRealm shiroRealm) {
+    public SessionsSecurityManager securityManager(ShiroRealm shiroRealm) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(shiroRealm);
         return securityManager;

@@ -50,12 +50,14 @@
     </update>
 
     <!--查询全局属性详情-->
-    <select id="findGlobalPropertyById" parameterType="string" resultType="com.sly.baseplatform.common.model.GlobalProperty">
+    <select id="findGlobalPropertyById" parameterType="string"
+            resultType="com.sly.baseplatform.common.model.GlobalProperty">
         SELECT * FROM `T_SYS_GLOBAL_PROPERTY` TSGP WHERE TSGP.`id`=#{globalPropertyId}
     </select>
 
     <!--查询全局属性列表-->
-    <select id="findGlobalPropertyList" parameterType="com.sly.baseplatform.common.model.GlobalProperty" resultType="com.sly.baseplatform.common.model.GlobalProperty">
+    <select id="findGlobalPropertyList" parameterType="com.sly.baseplatform.common.model.GlobalProperty"
+            resultType="com.sly.baseplatform.common.model.GlobalProperty">
         SELECT * FROM `T_SYS_GLOBAL_PROPERTY` TSGP
         <where>
             TSGP.`logicDel`='N'

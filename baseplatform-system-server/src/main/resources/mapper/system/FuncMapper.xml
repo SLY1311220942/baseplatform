@@ -132,10 +132,10 @@
         LEFT JOIN `T_SYS_USERROLE` TSUR ON TSUR.`roleId`=TSRF.`roleId`
         LEFT JOIN `T_SYS_ROLE` TSR ON TSUR.`roleId`=TSR.`id`
         WHERE
-            TSF.`logicDel`='N'
-            AND TSF.`isOpen`=1
-            AND TSR.`logicDel`='N'
-            AND TSR.`isOpen`=1
-            AND TSUR.`userId`=#{userId}
+        TSF.`logicDel`='N'
+        AND TSF.`isOpen`=1
+        AND TSR.`logicDel`='N'
+        AND TSR.`isOpen`=1
+        AND TSUR.`userId`=#{userId}
     </select>
 </mapper>

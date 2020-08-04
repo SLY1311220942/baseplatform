@@ -43,7 +43,8 @@
     </select>
 
     <!--查询角色列表-->
-    <select id="findRoleList" parameterType="com.sly.baseplatform.common.model.Role" resultType="com.sly.baseplatform.common.model.Role">
+    <select id="findRoleList" parameterType="com.sly.baseplatform.common.model.Role"
+            resultType="com.sly.baseplatform.common.model.Role">
         SELECT * FROM `T_SYS_ROLE` TSR
         <where>
             TSR.`logicDel`='N'

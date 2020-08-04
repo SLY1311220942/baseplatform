@@ -35,7 +35,8 @@
     </select>
 
     <!--查询定时任务列表-->
-    <select id="findWorkJobList" parameterType="com.sly.baseplatform.common.model.WorkJob" resultType="com.sly.baseplatform.common.model.WorkJob">
+    <select id="findWorkJobList" parameterType="com.sly.baseplatform.common.model.WorkJob"
+            resultType="com.sly.baseplatform.common.model.WorkJob">
         SELECT * FROM `T_SYS_WORKJOB` TSW
         <where>
             TSW.`logicDel`='N'

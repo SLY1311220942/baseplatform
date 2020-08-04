@@ -9,7 +9,8 @@
     </select>
 
     <!--查询用户列表-->
-    <select id="findUserList" parameterType="com.sly.baseplatform.common.model.User" resultType="com.sly.baseplatform.common.model.User">
+    <select id="findUserList" parameterType="com.sly.baseplatform.common.model.User"
+            resultType="com.sly.baseplatform.common.model.User">
         SELECT * FROM `T_SYS_USER` TSU
         <where>
             <if test="username != null and username != ''">

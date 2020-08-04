@@ -52,7 +52,7 @@ public class GlobalProperty extends BaseModel {
     /**
      * isOpen tinyint(4) NULL是否启用:0.关闭 1.启用
      */
-    @Regex(message = "是否启用只能是启用或关闭！",group = {"addGlobalProperty", "updateGlobalProperty"},regexp = "0|1")
+    @Regex(message = "是否启用只能是启用或关闭！", group = {"addGlobalProperty", "updateGlobalProperty"}, regexp = "0|1")
     private Integer isOpen;
     /**
      * logicDel char(1) NULL逻辑删除:Y.删除 N.未删除

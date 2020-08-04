@@ -125,5 +125,6 @@ public interface FuncService {
      * @author SLY
      * @time 2020/1/10
      */
+    @RequestMapping(value = "/func/findUserAllFuncs", method = RequestMethod.POST)
     BaseResult findUserAllFuncs(@RequestParam("userId") String userId);
 }
