@@ -120,7 +120,7 @@ public interface FuncService {
     /**
      * 获取用户所有功能
      *
-     * @param
+     * @param userId
      * @return
      * @author SLY
      * @time 2020/1/10
